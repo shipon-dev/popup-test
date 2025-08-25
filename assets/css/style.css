@@ -1,4 +1,128 @@
-.toast { transition: all 0.5s ease; opacity: 0; transform: translateY(-10px); }
-.toast.show { opacity: 1; transform: translateY(0); }
-#cookieBanner { transform: translateY(100%); transition: transform 0.5s ease; }
-#cookieBanner.show { transform: translateY(0); }
+/* Navbar-এর জন্য স্মুথ ট্রানজিশন স্টাইল */
+#navbar {
+  transition: background-color 0.5s ease, box-shadow 0.5s ease;
+}
+#navbar.navbar-scrolled {
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  backdrop-filter: blur(8px);
+}
+#logo,
+.nav-link,
+#menu-btn svg {
+  transition: color 0.5s ease;
+}
+#navbar.navbar-scrolled #logo,
+#navbar.navbar-scrolled .nav-link,
+#navbar.navbar-scrolled #menu-btn svg {
+  color: #1a2e28;
+}
+#navbar.navbar-scrolled .nav-link:hover {
+  color: #c7a17a;
+}
+
+/* === নতুন স্লাইডিং মেনুর জন্য CSS === */
+/* মেনু খোলা অবস্থায় বডি স্ক্রল বন্ধ রাখা */
+body.menu-open {
+  overflow: hidden;
+}
+/* মেনু কন্টেইনারকে ডিফল্টভাবে অদৃশ্য রাখা */
+#mobile-menu-container {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease-in-out;
+}
+/* মেনু প্যানেলকে ডিফল্টভাবে বাম দিকে স্ক্রিনের বাইরে রাখা */
+#mobile-menu-panel {
+  transform: translateX(-100%);
+  transition: transform 0.4s ease-in-out;
+}
+/* .menu-open ক্লাস যুক্ত হলে কন্টেইনার দৃশ্যমান হবে */
+#mobile-menu-container.menu-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+/* .menu-open ক্লাস যুক্ত হলে মেনু প্যানেল স্লাইড করে ভেতরে আসবে */
+#mobile-menu-container.menu-open #mobile-menu-panel {
+  transform: translateX(0);
+}
+
+/* Filter  */
+.filter-btn.active {
+  background-color: #1a2e28;
+  color: white;
+}
+.product-card {
+  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+  display: block; /* Use block instead of flex/grid for easier hiding */
+}
+.product-card.hidden {
+  opacity: 0;
+  transform: scale(0.95);
+  visibility: hidden;
+  position: absolute; /* Take out of flow to prevent gaps */
+  pointer-events: none;
+}
+.navbar-scrolled {
+  background-color: #1a2e28;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+#mobile-menu-container {
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+#mobile-menu-container.menu-open {
+  opacity: 1;
+  visibility: visible;
+}
+body.menu-open {
+  overflow: hidden;
+}
+
+/* Active navigation link styles */
+.nav-link.active-nav {
+  color: #c7a17a !important;
+  font-weight: 600;
+}
+
+.mobile-nav-link.active-nav {
+  background-color: #f3f4f6;
+  color: #c7a17a !important;
+  font-weight: 600;
+}
+
+/* Active nav styles when navbar is scrolled */
+#navbar.navbar-scrolled .nav-link.active-nav {
+  color: #c7a17a !important;
+}
+
+/* Cookie Banner Styles */
+#cookieBanner {
+  backdrop-filter: blur(10px);
+  background: rgba(26, 46, 40, 0.95);
+}
+
+#cookieBanner.show {
+  transform: translateY(0);
+}
+
+#cookieBanner button {
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  #cookieBanner {
+    padding: 1rem;
+  }
+  
+  #cookieBanner .container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  #cookieBanner .flex {
+    width: 100%;
+    justify-content: center;
+  }
+}

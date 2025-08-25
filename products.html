@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Coffee - Ground State Coffee</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- AOS (Animate On Scroll) Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@700&display=swap"
+      rel="stylesheet" />
+
+    <!-- SweetAlert2 for Toast Messages -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <link rel="stylesheet" href="/assets/css/style.css" />
+
+    <style>
+      /* Cookie Banner Styles */
+      #cookieBanner {
+        transform: translateY(100%);
+      }
+      #cookieBanner.show {
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body class="bg-brand-light font-sans">
+    <!-- Navbar Placeholder -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- Cookie Banner -->
+    <div
+      id="cookieBanner"
+      class="fixed bottom-0 left-0 right-0 bg-brand-dark text-white p-4 shadow-lg transform translate-y-full transition-transform duration-300 z-50">
+      <div
+        class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex-1">
+          <p class="text-sm md:text-base">
+            🍪 We use cookies to improve your experience. By browsing, you agree
+            to our use of cookies.
+            <a
+              href="/legal/cookies.html"
+              class="text-brand-accent hover:underline ml-1"
+              >Learn more</a
+            >
+          </p>
+        </div>
+        <div class="flex gap-3">
+          <button
+            id="acceptCookies"
+            class="bg-brand-accent hover:bg-opacity-90 text-white px-6 py-2 rounded-full text-sm font-semibold transition-colors">
+            Accept all
+          </button>
+          <button
+            id="manageCookies"
+            class="border border-white hover:bg-white hover:text-brand-dark text-white px-6 py-2 rounded-full text-sm font-semibold transition-colors">
+            Manage
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== Hero Section ========== -->
+    <section class="relative">
+      <image
+        src="https://images.unsplash.com/photo-1696572777898-765c7f33a4d5?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        class="absolute w-full h-full -z-10 object-cover" />
+      <div class="absolute inset-0 bg-black/50 -z-10"></div>
+      <div class="container mx-auto px-6 text-center py-20 md:py-32">
+        <h1 class="font-serif text-4xl md:text-6xl text-white">
+          Our Full Spectrum of Blends
+        </h1>
+        <p class="mt-4 text-lg text-white/60 max-w-2xl mx-auto">
+          Explore our curated collection, each roasted with scientific precision
+          to unlock its purest state of flavor.
+        </p>
+      </div>
+    </section>
+
+    <!-- ========== Products Section ========== -->
+    <section class="py-16 md:py-24">
+      <div class="container mx-auto px-6">
+        <div
+          id="filter-container"
+          class="flex flex-wrap justify-center items-center gap-2 md:gap-4 mb-12">
+          <button
+            class="filter-btn active px-4 py-2 md:px-6 md:py-2.5 rounded-full font-semibold text-sm md:text-base transition-all duration-300"
+            data-filter="*">
+            All
+          </button>
+          <button
+            class="filter-btn px-4 py-2 md:px-6 md:py-2.5 rounded-full font-semibold text-sm md:text-base transition-all duration-300"
+            data-filter="blend">
+            Blends
+          </button>
+          <button
+            class="filter-btn px-4 py-2 md:px-6 md:py-2.5 rounded-full font-semibold text-sm md:text-base transition-all duration-300"
+            data-filter="single-origin">
+            Single Origin
+          </button>
+          <button
+            class="filter-btn px-4 py-2 md:px-6 md:py-2.5 rounded-full font-semibold text-sm md:text-base transition-all duration-300"
+            data-filter="decaf">
+            Decaf
+          </button>
+        </div>
+
+        <!-- Product cards will be dynamically inserted here -->
+        <div
+          id="product-grid"
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+          <!-- Dynamically generated cards will appear here -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== Popup Modal ========== -->
+    <div
+      id="popup-overlay"
+      class="fixed inset-0 bg-black/60 backdrop-blur-sm opacity-0 invisible transition-all duration-300 z-50"></div>
+    <div
+      id="popup-wrapper"
+      class="fixed inset-0 flex items-center justify-center p-4 invisible pointer-events-none z-50">
+      <div
+        id="popup-modal"
+        class="rounded-2xl shadow-2xl w-full max-w-2xl opacity-0 transform translate-y-3 scale-95 transition-all duration-300 relative">
+        <div
+          class="flex items-center justify-between p-6 fixed top-0 right-0 z-40">
+          <button
+            id="popup-close"
+            onclick="closePopup()"
+            class="text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg p-2 transition-colors duration-200">
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+        <div id="popup-body" class="max-h-[75vh] overflow-y-auto rounded-2xl">
+          <!-- Dynamic content goes here -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- AOS JavaScript -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="/assets/js/nav.js"></script>
+    <script src="/assets/js/cookie-consent.js"></script>
+    <script>
+      AOS.init();
+    </script>
+  </body>
+</html>

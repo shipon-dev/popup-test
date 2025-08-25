@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookie Consent & Policy - Ground State Coffee</title>
+
+    <!-- SEO Meta Tags -->
+    <meta
+      name="description"
+      content="Cookie Policy for Ground State Coffee. Learn about how we use cookies to improve your browsing experience on our website." />
+    <meta
+      name="keywords"
+      content="cookie policy, Ground State Coffee cookies, website cookies, browsing experience, cookie consent" />
+    <link
+      rel="canonical"
+      href="https://groundstatecoffee.com/legal/cookies.html" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@700&display=swap"
+      rel="stylesheet" />
+
+    <link rel="stylesheet" href="/assets/css/style.css" />
+
+    <style>
+      .navbar-scrolled {
+        background-color: #1a2e28;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+      .hero-bg {
+        background-image: linear-gradient(
+            rgba(26, 46, 40, 0.7),
+            rgba(26, 46, 40, 0.7)
+          ),
+          url("https://images.unsplash.com/photo-1559925393-8be0ec4767c8?q=80&w=2070&auto=format=fit=crop");
+        background-size: cover;
+        background-position: center;
+      }
+      /* Improved Toggle Switch */
+      .toggle-label {
+        width: 52px;
+        height: 28px;
+        background-color: #d1d5db; /* gray-300 */
+        border-radius: 9999px;
+        position: relative;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      .toggle-dot {
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        width: 22px;
+        height: 22px;
+        background-color: white;
+        border-radius: 50%;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      input:checked + .toggle-label {
+        background-color: #c7a17a; /* brand-accent */
+      }
+      input:checked + .toggle-label .toggle-dot {
+        transform: translateX(24px);
+      }
+      input:disabled + .toggle-label {
+        cursor: not-allowed;
+        background-color: #e5e7eb; /* gray-200 */
+      }
+      input:checked:disabled + .toggle-label {
+        background-color: #1a2e28; /* brand-dark */
+        opacity: 0.8;
+      }
+    </style>
+  </head>
+  <body class="bg-brand-light font-sans">
+    <!-- Navbar Placeholder -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- ========== Hero Section ========== -->
+    <section class="hero-bg pt-32 pb-16 md:pt-40 md:pb-24">
+      <div class="container mx-auto px-6 text-center text-white">
+        <h1 class="font-serif text-4xl md:text-6xl">
+          Your Privacy, Your Choice
+        </h1>
+        <p class="mt-4 text-lg md:text-xl max-w-2xl mx-auto text-gray-200">
+          We use cookies to enhance your experience. You can customize your
+          preferences below.
+        </p>
+      </div>
+    </section>
+
+    <!-- ========== Main Content Section ========== -->
+    <main class="container mx-auto px-6 -mt-16 relative z-10 pb-24">
+      <div
+        class="bg-white/90 backdrop-blur-sm shadow-2xl rounded-xl border border-gray-200/50 overflow-hidden">
+        <div class="grid md:grid-cols-3">
+          <!-- Left Column: Consent Manager -->
+          <div
+            class="md:col-span-1 p-8 border-r border-gray-200/80 bg-gray-50/50">
+            <h2 class="font-serif text-2xl text-brand-dark mb-2">
+              Consent Choices
+            </h2>
+            <p class="text-brand-gray mb-6">
+              Your current status:
+              <span id="cookie-status" class="font-bold p-1 rounded-md text-sm"
+                >Awaiting Action</span
+              >
+            </p>
+
+            <!-- Cookie Toggles -->
+            <div class="space-y-5">
+              <div class="p-4 border rounded-lg bg-white">
+                <div class="flex items-center justify-between">
+                  <label
+                    for="toggle-necessary"
+                    class="font-bold text-brand-dark cursor-not-allowed"
+                    >Strictly Necessary</label
+                  >
+                  <input
+                    type="checkbox"
+                    id="toggle-necessary"
+                    class="hidden"
+                    checked
+                    disabled />
+                  <div class="toggle-label"><div class="toggle-dot"></div></div>
+                </div>
+                <p class="text-xs text-brand-gray mt-1">
+                  Essential for site functionality and security.
+                </p>
+              </div>
+              <div class="p-4 border rounded-lg bg-white">
+                <div class="flex items-center justify-between">
+                  <label
+                    for="toggle-performance"
+                    class="font-bold text-brand-dark cursor-pointer"
+                    >Performance & Analytics</label
+                  >
+                  <input
+                    type="checkbox"
+                    id="toggle-performance"
+                    class="hidden peer" />
+                  <label for="toggle-performance" class="toggle-label"
+                    ><div class="toggle-dot"></div
+                  ></label>
+                </div>
+                <p class="text-xs text-brand-gray mt-1">
+                  Helps us analyze site traffic and improve performance.
+                </p>
+              </div>
+              <div class="p-4 border rounded-lg bg-white">
+                <div class="flex items-center justify-between">
+                  <label
+                    for="toggle-functionality"
+                    class="font-bold text-brand-dark cursor-pointer"
+                    >Functionality</label
+                  >
+                  <input
+                    type="checkbox"
+                    id="toggle-functionality"
+                    class="hidden peer" />
+                  <label for="toggle-functionality" class="toggle-label"
+                    ><div class="toggle-dot"></div
+                  ></label>
+                </div>
+                <p class="text-xs text-brand-gray mt-1">
+                  Remembers your choices for a personal experience.
+                </p>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="mt-8 space-y-3">
+              <button
+                id="save-prefs-btn"
+                class="w-full bg-brand-dark text-white px-6 py-3 rounded-full font-semibold hover:bg-black transition-all transform hover:scale-105">
+                Save Preferences
+              </button>
+              <button
+                id="accept-all-btn"
+                class="w-full bg-brand-accent text-white px-6 py-3 rounded-full font-semibold hover:bg-opacity-90 transition-all transform hover:scale-105">
+                Accept All
+              </button>
+              <button
+                id="reject-all-btn"
+                class="w-full text-brand-dark px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition-all">
+                Reject Non-Essential
+              </button>
+            </div>
+            <div
+              id="success-message"
+              class="text-center text-green-600 font-semibold mt-4 h-6 opacity-0 transition-opacity duration-300">
+              Preferences Saved!
+            </div>
+          </div>
+
+          <!-- Right Column: Detailed Policy -->
+          <div class="md:col-span-2 p-8 md:p-10">
+            <h2 class="font-serif text-3xl text-brand-dark mb-4">
+              Cookie Policy
+            </h2>
+            <div class="prose max-w-none text-brand-gray leading-relaxed">
+              <p>
+                Our website uses cookies to enhance your experience. This policy
+                provides detailed information about how we use cookies and how
+                you can control them.
+              </p>
+
+              <h4>What Are Cookies?</h4>
+              <p>
+                A cookie is a small text file saved on your device when you
+                visit a site. It allows the site to remember your actions and
+                preferences over time, so you don't have to keep re-entering
+                them.
+              </p>
+
+              <h4>Detailed Cookie Usage</h4>
+              <p>
+                The table below lists the primary cookies we use. Note that
+                third-party services like Google Analytics may set their own
+                cookies, which are governed by their respective privacy
+                policies.
+              </p>
+
+              <div class="overflow-x-auto my-6 rounded-lg border">
+                <table class="min-w-full text-sm">
+                  <thead class="bg-gray-50">
+                    <tr>
+                      <th class="px-6 py-3 text-left font-bold text-brand-dark">
+                        Cookie
+                      </th>
+                      <th class="px-6 py-3 text-left font-bold text-brand-dark">
+                        Purpose
+                      </th>
+                      <th class="px-6 py-3 text-left font-bold text-brand-dark">
+                        Duration
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="bg-white divide-y">
+                    <tr>
+                      <td class="px-6 py-4 font-semibold">cookie_consent</td>
+                      <td class="px-6 py-4">
+                        Stores your consent choices. (Necessary)
+                      </td>
+                      <td class="px-6 py-4">1 Year</td>
+                    </tr>
+                    <tr>
+                      <td class="px-6 py-4 font-semibold">_ga, _gid</td>
+                      <td class="px-6 py-4">
+                        Distinguishes users for analytics. (Performance)
+                      </td>
+                      <td class="px-6 py-4">2 Years</td>
+                    </tr>
+                    <tr>
+                      <td class="px-6 py-4 font-semibold">user_prefs</td>
+                      <td class="px-6 py-4">
+                        Remembers choices like language. (Functionality)
+                      </td>
+                      <td class="px-6 py-4">6 Months</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <h4>How to Control Cookies</h4>
+              <p>
+                You can control and/or delete cookies as you wish using the
+                settings on this page or in your browser. For more details,
+                visit
+                <a
+                  href="https://www.aboutcookies.org"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-brand-accent hover:underline"
+                  >aboutcookies.org</a
+                >. Please note that disabling certain cookies may affect the
+                functionality of this website.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // --- Navigation Bar Scroll Logic ---
+        const navbar = document.getElementById("navbar");
+        const heroSection = document.querySelector(".hero-bg");
+        const observer = new IntersectionObserver(
+          ([entry]) => {
+            if (!entry.isIntersecting) {
+              navbar.classList.add("navbar-scrolled");
+            } else {
+              navbar.classList.remove("navbar-scrolled");
+            }
+          },
+          { threshold: 0.1 }
+        );
+        if (heroSection) {
+          observer.observe(heroSection);
+        }
+
+        // --- Cookie Consent Logic ---
+        const toggles = {
+          performance: document.getElementById("toggle-performance"),
+          functionality: document.getElementById("toggle-functionality"),
+        };
+
+        const statusEl = document.getElementById("cookie-status");
+        const successMessage = document.getElementById("success-message");
+
+        const acceptAllBtn = document.getElementById("accept-all-btn");
+        const rejectAllBtn = document.getElementById("reject-all-btn");
+        const savePrefsBtn = document.getElementById("save-prefs-btn");
+
+        function loadPreferences() {
+          const savedConsent = localStorage.getItem("cookieConsent");
+          if (savedConsent) {
+            const consent = JSON.parse(savedConsent);
+            toggles.performance.checked = consent.performance;
+            toggles.functionality.checked = consent.functionality;
+            updateStatus(false);
+          } else {
+            statusEl.textContent = "Awaiting Action";
+            statusEl.className =
+              "font-bold p-1 rounded-md text-sm text-yellow-800 bg-yellow-100";
+          }
+        }
+
+        function updateStatus(showSuccess) {
+          const savedConsent = localStorage.getItem("cookieConsent");
+          if (savedConsent) {
+            statusEl.textContent = "Preferences Saved";
+            statusEl.className =
+              "font-bold p-1 rounded-md text-sm text-green-800 bg-green-100";
+            if (showSuccess) {
+              successMessage.classList.remove("opacity-0");
+              setTimeout(() => successMessage.classList.add("opacity-0"), 2000);
+            }
+          }
+        }
+
+        function savePreferences() {
+          const consent = {
+            performance: toggles.performance.checked,
+            functionality: toggles.functionality.checked,
+            timestamp: new Date().toISOString(),
+          };
+          localStorage.setItem("cookieConsent", JSON.stringify(consent));
+          updateStatus(true);
+        }
+
+        acceptAllBtn.addEventListener("click", () => {
+          toggles.performance.checked = true;
+          toggles.functionality.checked = true;
+          savePreferences();
+        });
+
+        rejectAllBtn.addEventListener("click", () => {
+          toggles.performance.checked = false;
+          toggles.functionality.checked = false;
+          savePreferences();
+        });
+
+        savePrefsBtn.addEventListener("click", savePreferences);
+
+        loadPreferences();
+      });
+    </script>
+    <script src="/assets/js/nav.js"></script>
+    <script src="/assets/js/tailwind.config.js"></script>
+  </body>
+</html>

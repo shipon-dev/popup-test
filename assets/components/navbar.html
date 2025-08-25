@@ -1,0 +1,103 @@
+<div class="">
+  <!-- ========== Navigation Bar ========== -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-40">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <a
+        href="/index.html"
+        class="font-serif text-2xl font-bold text-white"
+        id="logo">
+        Ground State
+      </a>
+      <div class="hidden md:flex items-center space-x-8">
+        <a
+          href="/index.html"
+          class="nav-link text-white hover:text-brand-accent"
+          >Home</a
+        >
+        <a
+          href="/about.html"
+          class="nav-link text-white hover:text-brand-accent"
+          >Our Story</a
+        >
+        <a
+          href="/products.html"
+          class="nav-link text-white hover:text-brand-accent"
+          >Menu</a
+        >
+        <a
+          href="/contact.html"
+          class="nav-link text-white hover:text-brand-accent"
+          >Contact</a
+        >
+        <a
+          href="/contact.html"
+          class="bg-brand-accent text-white px-5 py-2 rounded-full hover:bg-brand-dark transition-colors duration-300"
+          >Order Online</a
+        >
+      </div>
+      <button id="menu-btn" class="md:hidden focus:outline-none z-50">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6 text-white"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16m-7 6h7" />
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ========== Mobile Menu Overlay ========== -->
+  <div id="mobile-menu-container" class="fixed inset-0 z-50">
+    <div id="mobile-menu-backdrop" class="absolute inset-0 bg-black/50"></div>
+    <div
+      id="mobile-menu-panel"
+      class="relative z-10 h-full w-72 bg-white shadow-xl flex flex-col">
+      <a
+        href="/index.html"
+        class="font-serif text-2xl font-bold text-brand-dark pt-6 px-4"
+        id="logo">
+        Ground State
+      </a>
+      <!-- Navigation Links -->
+      <div class="flex-1 py-4 px-4">
+        <nav class="space-y-1">
+          <a
+            href="/index.html"
+            class="mobile-nav-link flex items-center px-6 py-3 text-gray-700 hover:bg-gray-50 hover:text-brand-accent transition-colors duration-200 rounded-2xl">
+            Home
+          </a>
+          <a
+            href="/about.html"
+            class="mobile-nav-link flex items-center px-6 py-3 text-gray-700 hover:bg-gray-50 hover:text-brand-accent transition-colors duration-200 rounded-2xl">
+            Our Story
+          </a>
+          <a
+            href="/products.html"
+            class="mobile-nav-link flex items-center px-6 py-3 text-gray-700 hover:bg-gray-50 hover:text-brand-accent transition-colors duration-200 rounded-2xl">
+            Menu
+          </a>
+          <a
+            href="/contact.html"
+            class="mobile-nav-link flex items-center px-6 py-3 text-gray-700 hover:bg-gray-50 hover:text-brand-accent transition-colors duration-200 rounded-2xl">
+            Contact
+          </a>
+        </nav>
+
+        <!-- Order Button -->
+        <div class="px-6 pt-6">
+          <a
+            href="/contact.html"
+            class="block w-full text-center bg-brand-accent text-white py-3 px-4 rounded-full hover:bg-brand-dark transition-colors duration-300 font-semibold">
+            Order Online
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,100 +1,100 @@
 // SweetAlert2 Utility Functions with enhanced configuration
 window.SweetUtils = {
-  success: (title, text = '') => {
+  success: (title, text = "") => {
     return Swal.fire({
-      icon: 'success',
+      icon: "success",
       title: title,
       text: text,
       timer: 3000,
       timerProgressBar: true,
       showConfirmButton: false,
-      background: '#f0fdf4',
-      color: '#166534',
+      background: "#f0fdf4",
+      color: "#166534",
       allowOutsideClick: false, // Outside click disable
-      allowEscapeKey: false     // Escape key disable
+      allowEscapeKey: false, // Escape key disable
     });
   },
 
-  error: (title, text = '') => {
+  error: (title, text = "") => {
     return Swal.fire({
-      icon: 'error',
+      icon: "error",
       title: title,
       text: text,
-      confirmButtonColor: '#dc2626',
-      background: '#fef2f2',
-      color: '#991b1b',
+      confirmButtonColor: "#dc2626",
+      background: "#fef2f2",
+      color: "#991b1b",
       allowOutsideClick: false,
-      allowEscapeKey: false
+      allowEscapeKey: false,
     });
   },
 
-  warning: (title, text = '') => {
+  warning: (title, text = "") => {
     return Swal.fire({
-      icon: 'warning',
+      icon: "warning",
       title: title,
       text: text,
-      confirmButtonColor: '#f59e0b',
-      background: '#fffbeb',
-      color: '#92400e',
+      confirmButtonColor: "#f59e0b",
+      background: "#fffbeb",
+      color: "#92400e",
       allowOutsideClick: false,
-      allowEscapeKey: false
+      allowEscapeKey: false,
     });
   },
 
-  info: (title, text = '') => {
+  info: (title, text = "") => {
     return Swal.fire({
-      icon: 'info',
+      icon: "info",
       title: title,
       text: text,
-      confirmButtonColor: '#3b82f6',
-      background: '#eff6ff',
-      color: '#1e40af',
+      confirmButtonColor: "#3b82f6",
+      background: "#eff6ff",
+      color: "#1e40af",
       allowOutsideClick: false,
-      allowEscapeKey: false
+      allowEscapeKey: false,
     });
   },
 
-  confirm: (title, text = '', confirmText = 'Yes', cancelText = 'No') => {
+  confirm: (title, text = "", confirmText = "Yes", cancelText = "No") => {
     return Swal.fire({
       title: title,
       text: text,
-      icon: 'question',
+      icon: "question",
       showCancelButton: true,
-      confirmButtonColor: '#10b981',
-      cancelButtonColor: '#ef4444',
+      confirmButtonColor: "#10b981",
+      cancelButtonColor: "#ef4444",
       confirmButtonText: confirmText,
       cancelButtonText: cancelText,
-      background: '#f8fafc',
+      background: "#f8fafc",
       allowOutsideClick: false,
-      allowEscapeKey: false
+      allowEscapeKey: false,
     });
   },
 
-  input: (title, inputPlaceholder = '', inputType = 'text') => {
+  input: (title, inputPlaceholder = "", inputType = "text") => {
     return Swal.fire({
       title: title,
       input: inputType,
       inputPlaceholder: inputPlaceholder,
       showCancelButton: true,
-      confirmButtonColor: '#6366f1',
-      cancelButtonColor: '#6b7280',
-      background: '#f8fafc',
+      confirmButtonColor: "#6366f1",
+      cancelButtonColor: "#6b7280",
+      background: "#f8fafc",
       allowOutsideClick: false,
-      allowEscapeKey: false
+      allowEscapeKey: false,
     });
   },
 
-  toast: (message, icon = 'success') => {
+  toast: (message, icon = "success") => {
     return Swal.fire({
       toast: true,
-      position: 'top-end',
+      position: "top-end",
       showConfirmButton: false,
       timer: 3000,
       timerProgressBar: true,
       icon: icon,
       title: message,
       allowOutsideClick: false,
-      allowEscapeKey: false
+      allowEscapeKey: false,
     });
   },
 
@@ -107,8 +107,8 @@ window.SweetUtils = {
       allowOutsideClick: false,
       allowEscapeKey: false,
       willClose: () => {
-        SweetUtils.toast('Timer finished!', 'info');
-      }
+        SweetUtils.toast("Timer finished!", "info");
+      },
     });
   },
 
@@ -133,32 +133,43 @@ window.SweetUtils = {
       `,
       showConfirmButton: false,
       showCancelButton: true,
-      cancelButtonText: '✕ Close',
-      cancelButtonColor: '#6b7280',
-      background: '#f8fafc',
-      allowOutsideClick: false,  // Outside click disable
-      allowEscapeKey: false,     // Escape key disable
-      width: '400px',
+      cancelButtonText: "✕ Close",
+      cancelButtonColor: "#6b7280",
+      background: "#f8fafc",
+      allowOutsideClick: false, // Outside click disable
+      allowEscapeKey: false, // Escape key disable
+      width: "400px",
       didOpen: () => {
         // Add event listeners for the buttons inside SweetAlert2
-        document.getElementById('swal-add-cart').addEventListener('click', function() {
-          const productId = parseInt(this.dataset.productId);
-          addToCartFromSwal(productId);
-          Swal.close();
-        });
-        
-        document.getElementById('swal-buy-now').addEventListener('click', function() {
-          const productId = parseInt(this.dataset.productId);
-          buyNowFromSwal(productId);
-          Swal.close();
-        });
-      }
+        document
+          .getElementById("swal-add-cart")
+          .addEventListener("click", function () {
+            const productId = parseInt(this.dataset.productId);
+            addToCartFromSwal(productId);
+            Swal.close();
+          });
+
+        document
+          .getElementById("swal-buy-now")
+          .addEventListener("click", function () {
+            const productId = parseInt(this.dataset.productId);
+            buyNowFromSwal(productId);
+            Swal.close();
+          });
+      },
     });
-  }
+  },
 };
 
 $(function () {
-  document.getElementById("y").textContent = new Date().getFullYear();
+  // Remove this problematic line:
+  // document.getElementById("y").textContent = new Date().getFullYear();
+
+  // Or add a null check:
+  const yearElement = document.getElementById("y");
+  if (yearElement) {
+    yearElement.textContent = new Date().getFullYear();
+  }
 
   // Cart array to store products
   let cart = [];
@@ -181,63 +192,133 @@ $(function () {
   $("#demoForm").on("submit", function (e) {
     e.preventDefault();
     const name = $(this).find('input[type="text"]').val();
-    
-    SweetUtils.success('🎉 Success!', `Thank you ${name}! Your form has been submitted successfully with SweetAlert2.`);
+
+    SweetUtils.success(
+      "🎉 Success!",
+      `Thank you ${name}! Your form has been submitted successfully with SweetAlert2.`
+    );
     this.reset();
   });
 
   // Cookie acceptance with SweetAlert2
+  // Cookie consent functionality - Updated Logic
+  function initializeCookieConsent() {
+    const cookieBanner = document.getElementById("cookieBanner");
+    const acceptBtn = document.getElementById("acceptCookies");
+    const manageBtn = document.getElementById("manageCookies");
+
+    // Check if user has already made a choice
+    const cookieConsent = localStorage.getItem("cookieConsent");
+
+    if (!cookieConsent) {
+      // Show banner after a short delay
+      setTimeout(() => {
+        cookieBanner.classList.add("show");
+      }, 1000);
+    }
+
+    // Accept all cookies
+    acceptBtn.addEventListener("click", function () {
+      const consent = {
+        necessary: true,
+        performance: true,
+        functionality: true,
+        timestamp: new Date().toISOString(),
+      };
+
+      localStorage.setItem("cookieConsent", JSON.stringify(consent));
+      cookieBanner.classList.remove("show");
+
+      if (typeof SweetUtils !== "undefined") {
+        SweetUtils.toast(
+          "🍪 ধন্যবাদ! Cookie preferences সেভ হয়েছে।",
+          "success"
+        );
+      }
+    });
+
+    // Manage cookies - redirect to cookies page
+    manageBtn.addEventListener("click", function () {
+      window.location.href = "/legal/cookies.html";
+    });
+  }
+
+  // Initialize cookie consent
+  initializeCookieConsent();
+
+  // Remove old cookie logic and replace with new one
+  // Comment out or remove these old lines:
+  /*
   if (!localStorage.getItem("cookieAccepted")) {
     $("#cookieBanner").addClass("show");
   }
   $("#acceptCookies").on("click", function () {
     localStorage.setItem("cookieAccepted", true);
     $("#cookieBanner").removeClass("show");
-    
     SweetUtils.toast('🍪 Cookies accepted! Enjoy the SweetAlert2 demos!', 'success');
   });
+  */
 
   // Demo button handlers
-  $('#successDemo').on('click', () => {
-    SweetUtils.success('Great Job!', 'This is a success message with beautiful styling!');
+  $("#successDemo").on("click", () => {
+    SweetUtils.success(
+      "Great Job!",
+      "This is a success message with beautiful styling!"
+    );
   });
 
-  $('#errorDemo').on('click', () => {
-    SweetUtils.error('Oops!', 'Something went wrong. This is an error message.');
+  $("#errorDemo").on("click", () => {
+    SweetUtils.error(
+      "Oops!",
+      "Something went wrong. This is an error message."
+    );
   });
 
-  $('#warningDemo').on('click', () => {
-    SweetUtils.warning('Warning!', 'Please be careful. This is a warning message.');
+  $("#warningDemo").on("click", () => {
+    SweetUtils.warning(
+      "Warning!",
+      "Please be careful. This is a warning message."
+    );
   });
 
-  $('#infoDemo').on('click', () => {
-    SweetUtils.info('Information', 'Here is some useful information for you.');
+  $("#infoDemo").on("click", () => {
+    SweetUtils.info("Information", "Here is some useful information for you.");
   });
 
-  $('#confirmDemo').on('click', () => {
-    SweetUtils.confirm('Are you sure?', 'Do you want to proceed with this action?', 'Yes, do it!', 'Cancel').then((result) => {
+  $("#confirmDemo").on("click", () => {
+    SweetUtils.confirm(
+      "Are you sure?",
+      "Do you want to proceed with this action?",
+      "Yes, do it!",
+      "Cancel"
+    ).then((result) => {
       if (result.isConfirmed) {
-        SweetUtils.success('Confirmed!', 'Your action has been confirmed.');
+        SweetUtils.success("Confirmed!", "Your action has been confirmed.");
       } else {
-        SweetUtils.info('Cancelled', 'Your action was cancelled.');
+        SweetUtils.info("Cancelled", "Your action was cancelled.");
       }
     });
   });
 
-  $('#inputDemo').on('click', () => {
-    SweetUtils.input('Enter your email', 'your@email.com', 'email').then((result) => {
-      if (result.value) {
-        SweetUtils.success('Thank you!', `Your email ${result.value} has been saved.`);
+  $("#inputDemo").on("click", () => {
+    SweetUtils.input("Enter your email", "your@email.com", "email").then(
+      (result) => {
+        if (result.value) {
+          SweetUtils.success(
+            "Thank you!",
+            `Your email ${result.value} has been saved.`
+          );
+        }
       }
-    });
+    );
   });
 
-  $('#toastDemo').on('click', () => {
-    SweetUtils.toast('This is a toast notification! 🍞', 'info');
+  $("#toastDemo").on("click", () => {
+    SweetUtils.toast("This is a toast notification! 🍞", "info");
   });
 
-  $('#timerDemo').on('click', () => {
-    SweetUtils.timer('This will close in 5 seconds...', 5000);
+  $("#timerDemo").on("click", () => {
+    SweetUtils.timer("This will close in 5 seconds...", 5000);
   });
 
   // Products array with enhanced data
@@ -283,29 +364,35 @@ $(function () {
       price: "$899",
       desc: "Powerful laptop designed for work, gaming, and creative professionals.",
       img: "https://picsum.photos/300/200?6",
-    }
+    },
   ];
 
   // Global functions for SweetAlert2 buttons
-  window.addToCartFromSwal = function(productId) {
-    const product = products.find(p => p.id === productId);
+  window.addToCartFromSwal = function (productId) {
+    const product = products.find((p) => p.id === productId);
     if (product) {
       cart.push(product);
-      SweetUtils.success('Added to Cart! 🛒', `${product.name} has been added to your cart. Total items: ${cart.length}`);
+      SweetUtils.success(
+        "Added to Cart! 🛒",
+        `${product.name} has been added to your cart. Total items: ${cart.length}`
+      );
     }
   };
 
-  window.buyNowFromSwal = function(productId) {
-    const product = products.find(p => p.id === productId);
+  window.buyNowFromSwal = function (productId) {
+    const product = products.find((p) => p.id === productId);
     if (product) {
       SweetUtils.confirm(
-        'Purchase Confirmation',
+        "Purchase Confirmation",
         `Do you want to buy ${product.name} for ${product.price}?`,
-        'Yes, Buy Now!',
-        'Cancel'
+        "Yes, Buy Now!",
+        "Cancel"
       ).then((result) => {
         if (result.isConfirmed) {
-          SweetUtils.success('Purchase Successful! 💳', `Thank you for purchasing ${product.name}!`);
+          SweetUtils.success(
+            "Purchase Successful! 💳",
+            `Thank you for purchasing ${product.name}!`
+          );
         }
       });
     }
@@ -333,13 +420,16 @@ $(function () {
   // Replace modal with SweetAlert2 for product details
   $("#productGrid").on("click", ".product-card", function (e) {
     // Don't show product details if button was clicked
-    if ($(e.target).hasClass('add-to-cart-btn') || $(e.target).hasClass('buy-now-btn')) {
+    if (
+      $(e.target).hasClass("add-to-cart-btn") ||
+      $(e.target).hasClass("buy-now-btn")
+    ) {
       return;
     }
-    
+
     const id = $(this).data("id");
     const product = products.find((x) => x.id === id);
-    
+
     // Show product details using SweetAlert2 instead of modal
     SweetUtils.productDetails(product);
   });
@@ -348,61 +438,70 @@ $(function () {
   // $("#closeModal, #productModal").off('click'); // Remove old modal handlers
 
   // Add to cart functionality
-  $(document).on('click', '.add-to-cart-btn', function(e) {
+  $(document).on("click", ".add-to-cart-btn", function (e) {
     e.stopPropagation(); // Prevent product card click
-    const productId = $(this).data('product-id');
-    const product = products.find(p => p.id === productId);
-    
+    const productId = $(this).data("product-id");
+    const product = products.find((p) => p.id === productId);
+
     if (product) {
       cart.push(product);
-      SweetUtils.success('Added to Cart! 🛒', `${product.name} has been added to your cart. Total items: ${cart.length}`);
+      SweetUtils.success(
+        "Added to Cart! 🛒",
+        `${product.name} has been added to your cart. Total items: ${cart.length}`
+      );
     }
   });
 
   // Buy now functionality
-  $(document).on('click', '.buy-now-btn', function(e) {
+  $(document).on("click", ".buy-now-btn", function (e) {
     e.stopPropagation(); // Prevent product card click
-    const productId = $(this).data('product-id');
-    const product = products.find(p => p.id === productId);
-    
+    const productId = $(this).data("product-id");
+    const product = products.find((p) => p.id === productId);
+
     if (product) {
       SweetUtils.confirm(
-        'Purchase Confirmation',
+        "Purchase Confirmation",
         `Do you want to buy ${product.name} for ${product.price}?`,
-        'Yes, Buy Now!',
-        'Cancel'
+        "Yes, Buy Now!",
+        "Cancel"
       ).then((result) => {
         if (result.isConfirmed) {
-          SweetUtils.success('Purchase Successful! 💳', `Thank you for purchasing ${product.name}!`);
+          SweetUtils.success(
+            "Purchase Successful! 💳",
+            `Thank you for purchasing ${product.name}!`
+          );
         }
       });
     }
   });
 
   // Clear cart functionality
-  $('#clearCartBtn').on('click', function() {
+  $("#clearCartBtn").on("click", function () {
     if (cart.length === 0) {
-      SweetUtils.info('Cart Empty', 'Your cart is already empty!');
+      SweetUtils.info("Cart Empty", "Your cart is already empty!");
       return;
     }
-    
+
     SweetUtils.confirm(
-      'Clear Cart?',
+      "Clear Cart?",
       `Are you sure you want to remove all ${cart.length} items from your cart?`,
-      'Yes, Clear All',
-      'Cancel'
+      "Yes, Clear All",
+      "Cancel"
     ).then((result) => {
       if (result.isConfirmed) {
         cart = [];
-        SweetUtils.success('Cart Cleared! 🗑️', 'All items have been removed from your cart.');
+        SweetUtils.success(
+          "Cart Cleared! 🗑️",
+          "All items have been removed from your cart."
+        );
       }
     });
   });
 
   // Main demo button
-  $('#demoBtn').on('click', function() {
+  $("#demoBtn").on("click", function () {
     Swal.fire({
-      title: '🎯 SweetAlert2 Demo Features',
+      title: "🎯 SweetAlert2 Demo Features",
       html: `
         <div class="text-left">
           <p class="mb-2">✅ <strong>Success/Error/Warning/Info alerts</strong></p>
@@ -416,12 +515,12 @@ $(function () {
           <p class="mb-2">🚫 <strong>Outside click disabled</strong></p>
         </div>
       `,
-      icon: 'info',
-      confirmButtonText: 'Awesome!',
-      confirmButtonColor: '#6366f1',
-      background: '#f8fafc',
+      icon: "info",
+      confirmButtonText: "Awesome!",
+      confirmButtonColor: "#6366f1",
+      background: "#f8fafc",
       allowOutsideClick: false,
-      allowEscapeKey: false
+      allowEscapeKey: false,
     });
   });
 });

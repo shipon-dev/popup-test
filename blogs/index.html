@@ -3,367 +3,214 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Animated Popup + Product Grid (HTML/CSS/JS/jQuery)</title>
+    <title>From the Lab: Our Blog - Ground State Coffee</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@700&display=swap"
       rel="stylesheet" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    
+    <!-- SweetAlert2 for Toast Messages -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
     <style>
-      :root {
-        --bg: #0b1220;
-        --card: #111a2e;
-        --muted: #9fb0d6;
-        --accent: #4f8cff;
-        --accent-2: #7c5cff;
-        --overlay: rgba(2, 8, 23, 0.6);
-        --radius: 16px;
+      /* Cookie Banner Styles */
+      #cookieBanner {
+        transform: translateY(100%);
       }
-      * {
-        box-sizing: border-box;
-      }
-      body {
-        margin: 0;
-        font-family: Inter, system-ui, sans-serif;
-        background: radial-gradient(
-          1200px 600px at 10% -10%,
-          #111a2e 0%,
-          #0b1220 40%,
-          #090f1c 100%
-        );
-        color: #e8eefc;
-      }
-      .container {
-        max-width: 1100px;
-        margin: 40px auto;
-        padding: 0 16px;
-      }
-      header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 16px;
-        margin-bottom: 24px;
-      }
-      h1 {
-        font-size: clamp(20px, 4vw, 28px);
-        margin: 0;
-      }
-      .hint {
-        color: var(--muted);
-        font-size: 14px;
-      }
-
-      /* Grid */
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-        gap: 18px;
-      }
-      .card {
-        background: linear-gradient(180deg, #121a2f 0%, #0f1629 100%);
-        border: 1px solid rgba(255, 255, 255, 0.06);
-        border-radius: var(--radius);
-        position: relative;
-        transition: transform 0.25s ease, box-shadow 0.25s ease,
-          border-color 0.25s ease;
-        display: flex;
-        flex-direction: column;
-      }
-      .card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 10px 28px rgba(79, 140, 255, 0.08);
-        border-color: rgba(79, 140, 255, 0.35);
-      }
-      .thumb {
-        aspect-ratio: 4/3;
-        width: 100%;
-        object-fit: cover;
-        display: block;
-      }
-      .content {
-        flex: 1;
-        padding: 14px;
-      }
-      .name {
-        font-weight: 600;
-        margin: 0 0 6px;
-      }
-      .price {
-        color: #cfe0ff;
-        font-weight: 600;
-      }
-      .btn {
-        background: linear-gradient(135deg, var(--accent), var(--accent-2));
-        border: none;
-        color: white;
-        padding: 10px 12px;
-        border-radius: 12px;
-        cursor: pointer;
-        font-weight: 600;
-        width: 100%;
-        margin-top: auto;
-      }
-
-      /* Overlay + Modal */
-      .overlay {
-        position: fixed;
-        inset: 0;
-        background: var(--overlay);
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.25s ease, visibility 0.25s ease;
-        z-index: 1000;
-      }
-      .overlay.active {
-        opacity: 1;
-        visibility: visible;
-      }
-
-      .modal-wrap {
-        position: fixed;
-        inset: 0;
-        display: grid;
-        place-items: center;
-        visibility: hidden;
-        pointer-events: none;
-        z-index: 1001;
-      }
-      .modal-wrap.active {
-        visibility: visible;
-        pointer-events: none;
-      }
-
-      .modal {
-        width: min(92vw, 560px);
-        background: #0f172a;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: calc(var(--radius) + 6px);
-        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
-        transform: translateY(12px) scale(0.96);
-        opacity: 0;
-        transition: transform 0.28s cubic-bezier(0.2, 0.7, 0.2, 1),
-          opacity 0.28s ease;
-        overflow: hidden;
-        pointer-events: auto;
-      }
-      .modal.active {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-        animation: pop 0.35s ease;
-      }
-
-      .modal-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        padding: 14px 16px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      }
-      .modal-title {
-        font-weight: 700;
-        margin: 0;
-        font-size: 18px;
-      }
-      .close {
-        border: none;
-        background: transparent;
-        color: #cfe0ff;
-        font-size: 20px;
-        cursor: pointer;
-        padding: 6px;
-        border-radius: 10px;
-      }
-      .close:hover {
-        background: rgba(255, 255, 255, 0.06);
-      }
-
-      .modal-body {
-        display: grid;
-        grid-template-columns: 160px 1fr;
-        gap: 16px;
-        padding: 16px;
-      }
-      .modal-thumb {
-        width: 100%;
-        border-radius: 12px;
-        aspect-ratio: 1/1;
-        object-fit: cover;
-        border: 1px solid rgba(255, 255, 255, 0.06);
-      }
-      .modal-meta {
-        font-size: 14px;
-        color: var(--muted);
-      }
-      .modal-meta p {
-        margin: 6px 0;
-      }
-
-      @media (max-width: 560px) {
-        .modal-body {
-          grid-template-columns: 1fr;
-        }
-      }
-
-      @keyframes pop {
-        0% {
-          transform: translateY(8px) scale(0.95);
-          opacity: 0.6;
-        }
-        100% {
-          transform: translateY(0) scale(1);
-          opacity: 1;
-        }
+      #cookieBanner.show {
+        transform: translateY(0);
       }
     </style>
   </head>
-  <body>
-    <div class="container">
-      <header>
-        <h1>Product Grid + Animated Popup</h1>
-        <p class="hint">
-          Click any product to open the popup. Click overlay or × to close.
+  <body class="bg-brand-light font-sans">
+    <!-- Header Placeholder -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- Cookie Banner -->
+    <div id="cookieBanner" class="fixed bottom-0 left-0 right-0 bg-brand-dark text-white p-4 shadow-lg transform translate-y-full transition-transform duration-300 z-50">
+      <div class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex-1">
+          <p class="text-sm md:text-base">
+            🍪 We use cookies to improve your experience. By browsing, you agree to our use of cookies.
+            <a href="/legal/cookies.html" class="text-brand-accent hover:underline ml-1">Learn more</a>
+          </p>
+        </div>
+        <div class="flex gap-3">
+          <button id="acceptCookies" class="bg-brand-accent hover:bg-opacity-90 text-white px-6 py-2 rounded-full text-sm font-semibold transition-colors">
+            Accept all
+          </button>
+          <button id="manageCookies" class="border border-white hover:bg-white hover:text-brand-dark text-white px-6 py-2 rounded-full text-sm font-semibold transition-colors">
+            Manage
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <header class="py-20 md:py-32 relative">
+      <!-- ব্যাকগ্রাউন্ড ইমেজ -->
+      <div class="absolute inset-0">
+        <img
+          src="https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?q=80&w=2070&auto=format=fit=crop"
+          alt="Pour-over coffee setup"
+          class="w-full h-full object-cover" />
+      </div>
+
+      <!-- ডার্ক ওভারলে -->
+
+      <div class="absolute inset-0 bg-brand-dark/60"></div>
+      <div class="container mx-auto px-6 text-center" data-aos="fade-up">
+        <h1 class="font-serif text-4xl md:text-6xl text-white">From the Lab</h1>
+        <p class="mt-4 text-lg text-brand-accent max-w-2xl mx-auto">
+          Our journal of coffee science, brewing experiments, stories from
+          origin, and community features.
         </p>
-      </header>
+      </div>
+    </header>
 
-      <div id="product-grid" class="grid"></div>
-    </div>
-
-    <!-- Overlay + Modal -->
-    <div id="overlay" class="overlay" aria-hidden="true"></div>
-    <div class="modal-wrap" aria-live="polite" aria-atomic="true">
-      <section
-        id="product-modal"
-        class="modal"
-        role="dialog"
-        aria-modal="true"
-        aria-hidden="true"
-        aria-labelledby="modal-title">
-        <div class="modal-header">
-          <h2 id="modal-title" class="modal-title">Product</h2>
-          <button class="close" id="btn-close" aria-label="Close">×</button>
-        </div>
-        <div class="modal-body">
-          <img id="modal-img" class="modal-thumb" alt="Product preview" />
-          <div>
-            <div
-              id="modal-price"
-              class="price"
-              style="font-size: 18px; margin-bottom: 8px"></div>
-            <div id="modal-desc" class="modal-meta"></div>
+    <main class="py-16 md:py-24">
+      <div class="container mx-auto px-6">
+        <section id="blog-section" class="p-8">
+          <div
+            class="grid lg:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8"
+            id="blog-container">
+            <!-- Blogs will be rendered here -->
           </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- SEO Meta Tags -->
+    <meta
+      name="description"
+      content="Explore coffee science, brewing techniques, and industry insights from Ground State Coffee's blog. Learn about coffee roasting, extraction methods, and more." />
+    <meta
+      name="keywords"
+      content="coffee blog, coffee science, brewing techniques, coffee roasting, coffee extraction, coffee education, Ground State Coffee blog" />
+    <link rel="canonical" href="https://groundstatecoffee.com/blogs/" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#8B4513" />
+
+    <!-- Open Graph Meta Tags -->
+    <meta
+      property="og:title"
+      content="From the Lab: Our Blog - Ground State Coffee" />
+    <meta
+      property="og:description"
+      content="Explore coffee science, brewing techniques, and industry insights from Ground State Coffee's blog." />
+    <meta property="og:url" content="https://groundstatecoffee.com/blogs/" />
+    <meta
+      property="og:image"
+      content="https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?q=80&w=2070&auto=format=fit=crop" />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="From the Lab: Our Blog - Ground State Coffee" />
+    <meta
+      name="twitter:description"
+      content="Explore coffee science, brewing techniques, and industry insights from Ground State Coffee's blog." />
+    <meta
+      name="twitter:image"
+      content="https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?q=80&w=2070&auto=format=fit=crop" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@700&display=swap"
+      rel="stylesheet" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    
+    <!-- SweetAlert2 for Toast Messages -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <style>
+      /* Cookie Banner Styles */
+      #cookieBanner {
+        transform: translateY(100%);
+      }
+      #cookieBanner.show {
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body class="bg-brand-light font-sans">
+    <!-- Header Placeholder -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- Cookie Banner -->
+    <div id="cookieBanner" class="fixed bottom-0 left-0 right-0 bg-brand-dark text-white p-4 shadow-lg transform translate-y-full transition-transform duration-300 z-50">
+      <div class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex-1">
+          <p class="text-sm md:text-base">
+            🍪 We use cookies to improve your experience. By browsing, you agree to our use of cookies.
+            <a href="/legal/cookies.html" class="text-brand-accent hover:underline ml-1">Learn more</a>
+          </p>
         </div>
-      </section>
+        <div class="flex gap-3">
+          <button id="acceptCookies" class="bg-brand-accent hover:bg-opacity-90 text-white px-6 py-2 rounded-full text-sm font-semibold transition-colors">
+            Accept all
+          </button>
+          <button id="manageCookies" class="border border-white hover:bg-white hover:text-brand-dark text-white px-6 py-2 rounded-full text-sm font-semibold transition-colors">
+            Manage
+          </button>
+        </div>
+      </div>
     </div>
 
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <header class="py-20 md:py-32 relative">
+      <!-- ব্যাকগ্রাউন্ড ইমেজ -->
+      <div class="absolute inset-0">
+        <img
+          src="https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?q=80&w=2070&auto=format=fit=crop"
+          alt="Pour-over coffee setup"
+          class="w-full h-full object-cover" />
+      </div>
+
+      <!-- ডার্ক ওভারলে -->
+
+      <div class="absolute inset-0 bg-brand-dark/60"></div>
+      <div class="container mx-auto px-6 text-center" data-aos="fade-up">
+        <h1 class="font-serif text-4xl md:text-6xl text-white">From the Lab</h1>
+        <p class="mt-4 text-lg text-brand-accent max-w-2xl mx-auto">
+          Our journal of coffee science, brewing experiments, stories from
+          origin, and community features.
+        </p>
+      </div>
+    </header>
+
+    <main class="py-16 md:py-24">
+      <div class="container mx-auto px-6">
+        <section id="blog-section" class="p-8">
+          <div
+            class="grid lg:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8"
+            id="blog-container">
+            <!-- Blogs will be rendered here -->
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-      const products = [
-        {
-          id: 1,
-          name: "Aurora Headphones",
-          price: 99.99,
-          img: "https://images.unsplash.com/photo-1518444080543-0cc2451b6603?q=80&w=1200&auto=format&fit=crop",
-          desc: "Wireless over-ear with 30h battery and deep bass.",
-        },
-        {
-          id: 2,
-          name: "Nebula Keyboard",
-          price: 79.0,
-          img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1200&auto=format&fit=crop",
-          desc: "Hot-swap mechanical keys, per-key RGB, USB-C.",
-        },
-        {
-          id: 3,
-          name: "Stellar Mouse",
-          price: 49.5,
-          img: "https://images.unsplash.com/photo-1510511336377-1a9caa095849?q=80&w=1200&auto=format&fit=crop",
-          desc: "Low-latency wireless with precision sensor.",
-        },
-        {
-          id: 4,
-          name: "Comet Webcam",
-          price: 59.99,
-          img: "https://images.unsplash.com/photo-1593062096033-9a26b09da705?q=80&w=1200&auto=format&fit=crop",
-          desc: "1080p glass lens with dual noise-cancel mics.",
-        },
-        {
-          id: 5,
-          name: "Orbit Mic",
-          price: 89.0,
-          img: "https://images.unsplash.com/photo-1614680376739-414d95ff43df?q=80&w=1200&auto=format&fit=crop",
-          desc: "Studio-grade condenser with cardioid pattern.",
-        },
-        {
-          id: 6,
-          name: "Nova Speakers",
-          price: 129.0,
-          img: "https://images.unsplash.com/photo-1516387938699-a93567ec168e?q=80&w=1200&auto=format&fit=crop",
-          desc: "Dual-driver desktop set with rich mids.",
-        },
-      ];
-
-      function renderProducts(list) {
-        const $grid = $("#product-grid");
-        const cards = $.map(list, (p) => {
-          return `
-          <article class="card" data-id="${
-            p.id
-          }" tabindex="0" role="button" aria-label="Open ${p.name}">
-            <img class="thumb" src="${p.img}" alt="${p.name}" />
-            <div class="content">
-              <h3 class="name">${p.name}</h3>
-              <div class="price">$${p.price.toFixed(2)}</div>
-              <button class="btn" data-open="${p.id}">Quick View</button>
-            </div>
-          </article>`;
-        }).join("");
-        $grid.html(cards);
-      }
-
-      const $overlay = $("#overlay");
-      const $modal = $("#product-modal");
-      const $modalWrap = $(".modal-wrap");
-
-      function openModal(product) {
-        if (!product) return;
-        $("#modal-title").text(product.name);
-        $("#modal-img").attr({ src: product.img, alt: product.name });
-        $("#modal-price").text(`$${product.price.toFixed(2)}`);
-        $("#modal-desc").html(`<p>${product.desc}</p><p>ID: ${product.id}</p>`);
-
-        $overlay.addClass("active").attr("aria-hidden", "false");
-        $modal.addClass("active").attr("aria-hidden", "false");
-        $modalWrap.addClass("active");
-      }
-
-      function closeModal() {
-        $overlay.removeClass("active").attr("aria-hidden", "true");
-        $modal.removeClass("active").attr("aria-hidden", "true");
-        $modalWrap.removeClass("active");
-      }
-
-      renderProducts(products);
-
-      $(document).on("click", "[data-open]", function () {
-        const id = Number($(this).attr("data-open"));
-        openModal(products.find((p) => p.id === id));
-      });
-
-      $(document).on("click", ".card", function (e) {
-        if ($(e.target).is("button")) return;
-        const id = Number($(this).attr("data-id"));
-        openModal(products.find((p) => p.id === id));
-      });
-
-      // $overlay.on("click", closeModal); // Removed - no close on outside click
-      $("#btn-close").on("click", closeModal);
-
-      $(document).on("keydown", function (e) {
-        if (e.key === "Escape") closeModal();
-      });
+      AOS.init({ duration: 800, once: true, offset: 50 });
     </script>
+    <script src="/assets/js/nav.js"></script>
+    <script src="/assets/js/blog.js"></script>
+    <script src="/assets/js/pup-up.js"></script>
+    <script src="/assets/js/tailwind.config.js"></script>
   </body>
 </html>

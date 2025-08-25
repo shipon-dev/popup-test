@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact — The Gilded Bean</title>
+
+    <!-- SEO Meta Tags -->
+    <meta
+      name="description"
+      content="Get in touch with The Gilded Bean. Visit our coffee shop, contact us for wholesale inquiries, or reach out for any coffee-related questions." />
+    <meta
+      name="keywords"
+      content="contact coffee shop, The Gilded Bean location, coffee shop contact, wholesale coffee, coffee inquiries, visit coffee shop" />
+    <link rel="canonical" href="https://groundstatecoffee.com/contact.html" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#8B4513" />
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Contact — The Gilded Bean" />
+    <meta
+      property="og:description"
+      content="Get in touch with The Gilded Bean. Visit our coffee shop, contact us for wholesale inquiries, or reach out for any coffee-related questions." />
+    <meta
+      property="og:url"
+      content="https://groundstatecoffee.com/contact.html" />
+    <meta
+      property="og:image"
+      content="/assets/images/heroes/contact-hero.jpg" />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Contact — The Gilded Bean" />
+    <meta
+      name="twitter:description"
+      content="Get in touch with The Gilded Bean. Visit our coffee shop, contact us for wholesale inquiries." />
+    <meta
+      name="twitter:image"
+      content="/assets/images/heroes/contact-hero.jpg" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@600;700&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+
+    <!-- GSAP (GreenSock Animation Platform) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+
+    <!-- SweetAlert2 for Toast Messages -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+      body {
+        /* Fallback background color */
+        background-color: #1a2e28;
+      }
+
+      /* Cookie Banner Styles */
+      #cookieBanner {
+        transform: translateY(100%);
+      }
+      #cookieBanner.show {
+        transform: translateY(0);
+      }
+
+      #bg-image {
+        /* The actual background image */
+        background-image: url("https://images.unsplash.com/photo-1554118811-1e0d58224f24?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Y2FmZSUyMGJhY2tncm91bmR8ZW58MHx8MHx8fDA%3D");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed; /* Keeps the image stationary on scroll */
+      }
+
+      .form-group {
+        position: relative;
+        border-bottom: 2px solid #aab8b3;
+        transition: border-color 0.3s ease;
+      }
+      .form-group:focus-within {
+        border-color: #c7a17a;
+      }
+      .form-input {
+        width: 100%;
+        border: none;
+        background: transparent;
+        padding: 10px 0;
+        color: #1a2e28;
+        outline: none;
+      }
+      .form-label {
+        position: absolute;
+        top: 10px;
+        left: 0;
+        color: #6b7280;
+        pointer-events: none;
+        transition: all 0.3s ease;
+      }
+      .form-input:focus + .form-label,
+      .form-input:not(:placeholder-shown) + .form-label {
+        top: -15px;
+        font-size: 12px;
+        color: #c7a17a;
+      }
+    </style>
+  </head>
+  <body class="font-sans text-brand-dark antialiased">
+    <!-- Navbar Placeholder -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- Cookie Banner -->
+    <div
+      id="cookieBanner"
+      class="fixed bottom-0 left-0 right-0 bg-brand-dark text-white p-4 shadow-lg transform translate-y-full transition-transform duration-300 z-50">
+      <div
+        class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex-1">
+          <p class="text-sm md:text-base">
+            🍪 We use cookies to improve your experience. By browsing, you agree
+            to our use of cookies.
+            <a
+              href="/legal/cookies.html"
+              class="text-brand-accent hover:underline ml-1"
+              >Learn more</a
+            >
+          </p>
+        </div>
+        <div class="flex gap-3">
+          <button
+            id="acceptCookies"
+            class="bg-brand-accent hover:bg-opacity-90 text-white px-6 py-2 rounded-full text-sm font-semibold transition-colors">
+            Accept all
+          </button>
+          <button
+            id="manageCookies"
+            class="border border-white hover:bg-white hover:text-brand-dark text-white px-6 py-2 rounded-full text-sm font-semibold transition-colors">
+            Manage
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Full screen background image container -->
+    <div id="bg-image" class="fixed top-0 left-0 w-full h-full z-[-1]"></div>
+
+    <div class="container mx-auto px-6 py-16 md:py-24">
+      <!-- Main Content Panel with Blur Effect -->
+      <div
+        class="main-panel opacity-0 bg-brand-light/80 backdrop-blur-lg rounded-xl shadow-2xl overflow-hidden">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+          <!-- Left Column: Information -->
+          <div class="md:col-span-5 p-8 md:p-12">
+            <div class="content-wrapper">
+              <span
+                class="text-brand-accent font-semibold tracking-wider uppercase"
+                >Contact Us</span
+              >
+              <h1
+                class="font-serif text-4xl md:text-5xl lg:text-6xl my-4 text-brand-dark leading-tight">
+                Let's Get Brewing.
+              </h1>
+              <p class="text-gray-600 text-lg leading-relaxed mb-8">
+                Have a question, a project idea, or just want to talk about
+                coffee? We're here for it. Reach out and let's start the
+                conversation.
+              </p>
+              <div class="space-y-6">
+                <div class="info-item flex items-center space-x-4">
+                  <svg
+                    class="h-6 w-6 text-brand-accent flex-shrink-0"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  <span class="text-brand-dark"
+                    >123 Artisan Row, Brewville, CA 90210</span
+                  >
+                </div>
+                <div class="info-item flex items-center space-x-4">
+                  <svg
+                    class="h-6 w-6 text-brand-accent flex-shrink-0"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                  <span class="text-brand-dark">hello@thegildedbean.com</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Form -->
+          <div class="md:col-span-7 p-8 md:p-12">
+            <div class="form-wrapper">
+              <form id="contactForm" novalidate>
+                <div class="space-y-10">
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      class="form-input"
+                      placeholder=" "
+                      required />
+                    <label for="name" class="form-label">Full Name</label>
+                  </div>
+                  <div class="form-group">
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      class="form-input"
+                      placeholder=" "
+                      required />
+                    <label for="email" class="form-label">Email Address</label>
+                  </div>
+                  <div class="form-group">
+                    <textarea
+                      id="message"
+                      name="message"
+                      rows="3"
+                      class="form-input"
+                      placeholder=" "
+                      required></textarea>
+                    <label for="message" class="form-label">Your Message</label>
+                  </div>
+                </div>
+                <div class="mt-12">
+                  <button
+                    type="submit"
+                    class="submit-button inline-block w-full text-center bg-brand-dark text-white font-bold py-4 px-8 rounded-lg tracking-wider uppercase transform transition-all duration-300 hover:bg-brand-accent hover:shadow-lg hover:-translate-y-1">
+                    Send Message
+                  </button>
+                </div>
+                <div
+                  id="form-message"
+                  class="mt-4 text-sm text-center h-4"></div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Map Section with Blur Effect -->
+      <div class="map-wrapper opacity-0 mt-16">
+        <div
+          class="bg-brand-light/80 backdrop-blur-lg rounded-xl shadow-2xl overflow-hidden p-6">
+          <h2 class="font-serif text-3xl text-center text-brand-dark mb-6">
+            Find Us Here
+          </h2>
+          <div class="aspect-w-16 aspect-h-9 rounded-md overflow-hidden">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3305.717594966624!2d-118.3942376847849!3d34.05693998060699!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2b93a39f0a8c3%3A0x6b18c6e2a2c6d44!2sBeverly%20Hills%2C%20CA%2090210%2C%20USA!5e0!3m2!1sen!2s!4v1678886400000!5m2!1sen!2s"
+              width="100%"
+              height="450"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <script src="/assets/js/nav.js"></script>
+    <script src="/assets/js/tailwind.config.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // --- GSAP Animations ---
+        const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+        // Animate the main content panel
+        tl.fromTo(
+          ".main-panel",
+          { y: 50, opacity: 0 },
+          { y: 0, opacity: 1, duration: 1 }
+        );
+
+        // Stagger animate the info items
+        tl.fromTo(
+          ".info-item",
+          { x: -30, opacity: 0 },
+          { x: 0, opacity: 1, duration: 0.5, stagger: 0.2 },
+          "-=0.7" // Overlap with previous animation
+        );
+
+        // Animate the form groups
+        tl.fromTo(
+          ".form-group",
+          { y: 20, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.5, stagger: 0.2 },
+          "-=1" // Overlap significantly
+        );
+
+        // Animate the map section
+        tl.fromTo(
+          ".map-wrapper",
+          { y: 50, opacity: 0 },
+          { y: 0, opacity: 1, duration: 1 },
+          "-=0.8" // Animate map in while form is still animating
+        );
+
+        // --- Form Validation Logic ---
+        const form = document.getElementById("contactForm");
+        const formMessage = document.getElementById("form-message");
+
+        form.addEventListener("submit", function (event) {
+          event.preventDefault();
+          // (Validation logic remains the same)
+          const name = document.getElementById("name").value.trim();
+          const email = document.getElementById("email").value.trim();
+          const message = document.getElementById("message").value.trim();
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+          formMessage.textContent = "";
+          formMessage.classList.remove("text-green-600", "text-red-600");
+
+          if (name === "" || email === "" || message === "") {
+            formMessage.textContent = "Please fill out all fields.";
+            formMessage.classList.add("text-red-600");
+            return;
+          }
+
+          if (!emailRegex.test(email)) {
+            formMessage.textContent = "Please enter a valid email address.";
+            formMessage.classList.add("text-red-600");
+            return;
+          }
+
+          // --- Simulate a successful submission ---
+          formMessage.textContent = `Thank you ${name}! Your message has been sent to our team.`;
+
+          // Show toast notification
+          const toast = document.createElement("div");
+          toast.className =
+            "fixed bottom-4 right-4 bg-brand-accent text-white px-6 py-3 rounded-lg shadow-lg transform translate-y-0 opacity-100 transition-all duration-300";
+          toast.textContent = "Message sent successfully!";
+          document.body.appendChild(toast);
+
+          // Remove toast after 3 seconds
+          setTimeout(() => {
+            toast.style.opacity = "0";
+            toast.style.transform = "translateY(100%)";
+            setTimeout(() => toast.remove(), 300);
+          }, 3000);
+          formMessage.classList.add("text-green-600");
+
+          gsap.to(".submit-button", {
+            backgroundColor: "#1a2e28",
+            textContent: "SENT!",
+            duration: 0.5,
+            onComplete: () => {
+              form.reset();
+              form.querySelectorAll(".form-input").forEach((input) => {
+                input.dispatchEvent(new Event("blur"));
+              });
+              setTimeout(() => {
+                gsap.to(".submit-button", {
+                  textContent: "Send Message",
+                  duration: 0.5,
+                });
+                formMessage.textContent = "";
+              }, 2000);
+            },
+          });
+        });
+      });
+    </script>
+
+    <!-- Cookie Consent Script -->
+    <script src="/assets/js/cookie-consent.js"></script>
+  </body>
+</html>
